@@ -21,13 +21,11 @@ namespace GDIPlus_1
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            Pen mypen = new Pen(Color.Black, 1);
-            mypen.DashStyle = DashStyle.Dash;
-            g.DrawRectangle(mypen, 10, 10, 200, 200);
-            mypen.Width = 4;
-            mypen.Color = Color.Pink;
+            Brush mybrush = new SolidBrush(Color.DarkGreen);
+            Pen mypen = new Pen(mybrush, 5);
             g.DrawEllipse(mypen, 10, 10, 200, 200);
             mypen.Dispose();
+            mybrush.Dispose();
         }
     }
 }
