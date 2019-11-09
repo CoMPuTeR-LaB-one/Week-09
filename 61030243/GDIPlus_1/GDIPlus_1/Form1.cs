@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace GDIPlus_1
 {
@@ -19,17 +20,24 @@ namespace GDIPlus_1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            this.SetClientSizeCore(500, 600);
             Graphics g = e.Graphics;
-            Point[] pt =
-            {
-                new Point(10,22),
-                new Point(188,246),
-                new Point(250,192),
-                new Point(220,48)
-            };
+            HatchBrush brush;
 
-            g.FillClosedCurve(Brushes.Blue, pt);
-            g.DrawClosedCurve(Pens.Red, pt);
+            int x = 20, y = 20;
+
+            foreach (HatchStyle br in Enum.GetValues(typeof(HatchStyle)))
+            {
+                brush = new HatchBrush(br, Color.Navy, Color.Yellow);
+                g.FillRectangle(brush, x, y, 40, 20);
+                y += 30;
+                if((y + 30) > this.ClientSize.Height)
+                {
+                    y = 20;
+                    x += 150;
+                }
+            }
+
             g.Dispose();
         }
     }
